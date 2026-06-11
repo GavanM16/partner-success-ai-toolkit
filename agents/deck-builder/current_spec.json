@@ -1,0 +1,150 @@
+{
+  "title": "Partner Success Team",
+  "subtitle": "All Hands — Q2 FY27",
+  "presenter": "Mihai Gavan",
+  "date": "June 2026",
+  "deck_type": "All Hands",
+  "theme": "dark",
+  "output_filename": "Partner_Success_All_Hands_Q2_FY27.pptx",
+  "slides": [
+    { "type": "cover" },
+    {
+      "type": "agenda",
+      "title": "Today's Agenda",
+      "items": ["Program Update", "FY26 Statistics", "Partner Success Tiers", "Why Partner Success?", "Delivery Assurance", "Next Steps"]
+    },
+    {
+      "type": "stat_row",
+      "title": "FY26 at a Glance",
+      "stats": [
+        { "value": "18", "label": "Partners Enrolled", "color": "green" },
+        { "value": "10", "label": "Agentic Use Cases in Prod", "color": "orange" },
+        { "value": "200+", "label": "Certifications Delivered", "color": "blue" },
+        { "value": "94%", "label": "Team CSAT FY26", "color": "green" }
+      ]
+    },
+    {
+      "type": "section",
+      "number": "01",
+      "title": "Program Update",
+      "subtitle": "Q2 FY27 · Partner Success"
+    },
+    {
+      "type": "bullets",
+      "title": "FY26 Statistics — Instructor Led Trainings",
+      "subtitle": "Most demanded ILT sessions",
+      "bullets": [
+        "Agentic ILT — highest demand across all partner tiers",
+        "Document Understanding ILT — strong uptake in EMEA",
+        "Software Testing ILT — growing with GSI partners",
+        "Certification tutoring embedded in all ILT tracks",
+        "Agentic Automation Associate — most certified credential in FY26"
+      ]
+    },
+    {
+      "type": "section",
+      "number": "02",
+      "title": "Partner Success Tiers",
+      "subtitle": "Lightweight · Full Model · TPEN"
+    },
+    {
+      "type": "table",
+      "title": "TPEN vs Partner Success — Comparison",
+      "headers": ["Feature", "TPEN (Free)", "Lightweight ($100k)", "Full Model ($300k)"],
+      "rows": [
+        ["ILT & Workshops", "Calendar-based", "On-demand (limited)", "On-demand (custom)"],
+        ["Ticket Support SLA", "No SLA", "72 hours", "48 hours — first in line"],
+        ["Learning Credits", "Calendar tutoring", "50 vouchers ($7.5k)", "200 vouchers ($30k)"],
+        ["Exec Sponsorship", "None", "On approval", "🟢 Yes"],
+        ["UiPath Labs Access", "None", "Staging / Labs", "Staging / Labs"],
+        ["Dedicated TPEN Ambassador", "None", "On demand", "🟢 Yes"],
+        ["Delivery Assurance", "None", "3 included ($150k)", "10 included ($500k)"],
+        ["New AI Tools Early Access", "None", "Limited", "🟢 Early access"]
+      ]
+    },
+    {
+      "type": "section",
+      "number": "03",
+      "title": "Why Partner Success?",
+      "subtitle": "The value proposition"
+    },
+    {
+      "type": "cards",
+      "title": "Why Join the UiPath Partner Success Program",
+      "cards": [
+        {
+          "icon": "🏆",
+          "title": "Recognized Delivery Expert",
+          "body": "Partner Success badge showcases proven excellence in delivery — demonstrating to customers that you are a trusted, top-performing UiPath partner."
+        },
+        {
+          "icon": "🤝",
+          "title": "Partnership Alignment",
+          "body": "Subscribing to Partner Success demonstrates commitment to UiPath and unlocks exclusive go-to-market opportunities and qualified leads."
+        },
+        {
+          "icon": "🚀",
+          "title": "Early Expert Advantage",
+          "body": "Gain early access to UiPath innovations and best practices, enabling your team on the latest technologies before the market."
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "number": "04",
+      "title": "Delivery Assurance",
+      "subtitle": "Proactive support at every delivery stage"
+    },
+    {
+      "type": "two_col",
+      "title": "Delivery Assurance — How It Works",
+      "left": {
+        "heading": "What We Do",
+        "bullets": [
+          "Review — assess infra, design, develop, test at any stage",
+          "Recommendations — observations with criticality: High / Med / Low",
+          "Retest — re-verify High findings to ensure resolution",
+          "Available for both Lightweight and Full Model subscribers"
+        ]
+      },
+      "right": {
+        "heading": "Risk Coverage by Stage",
+        "bullets": [
+          "Discovery — unclear scope, missing requirements → High",
+          "Design — poor architecture, non-standard approach → High",
+          "Develop — coding errors, non-standard practice → High",
+          "Test — defect leakage, insufficient coverage → Medium",
+          "Deploy — infra failures, security breaches → High"
+        ]
+      }
+    },
+    {
+      "type": "timeline",
+      "title": "FY27 Roadmap",
+      "steps": [
+        { "phase": "Q1 FY27", "title": "Foundation", "dates": "Feb–Apr 2026", "status": "done", "detail": "18 partners enrolled, tooling live" },
+        { "phase": "Q2 FY27", "title": "Growth", "dates": "May–Jul 2026", "status": "active", "detail": "Expanding to 26 partners" },
+        { "phase": "Q3 FY27", "title": "Scale", "dates": "Aug–Oct 2026", "status": "upcoming", "detail": "Power BI agent + automation" },
+        { "phase": "Q4 FY27", "title": "Optimise", "dates": "Nov–Jan 2027", "status": "upcoming", "detail": "Full team AI toolkit rollout" }
+      ]
+    },
+    {
+      "type": "bullets",
+      "title": "Next Steps",
+      "subtitle": "Actions coming out of today",
+      "bullets": [
+        "All PSMs: complete Agentic ILT certification by end of Q2",
+        "Enablement team: schedule Agentic boot camp for enrolled partners — August 2026",
+        "Program team: onboard 8 new partners to hit 26-partner target",
+        "Mihai: present expansion business case to CFO — June 25",
+        "Everyone: share /qbr-prep and /deck-builder with your teams this week"
+      ]
+    },
+    {
+      "type": "closing",
+      "title": "Thank You",
+      "message": "Questions & Discussion",
+      "contact": "mihai.gavan@uipath.com"
+    }
+  ]
+}

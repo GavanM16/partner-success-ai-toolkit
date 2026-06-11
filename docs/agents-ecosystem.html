@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Ecosystem — UiPath Partner Success AI Toolkit</title>
+  <style>
+    :root {
+      --orange:    #FA4616;
+      --dark:      #1C1C2E;
+      --dark-card: #2A2A42;
+      --white:     #FFFFFF;
+      --off-white: #F5F5F7;
+      --mid-gray:  #8888AA;
+      --text:      #1A1A2E;
+      --green:     #2ECC71;
+      --yellow:    #F39C12;
+      --red:       #E74C3C;
+      --blue:      #3498DB;
+      --purple:    #9B59B6;
+      --teal:      #1ABC9C;
+      --orange-bg: #FFF0EB;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--off-white);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--dark);
+      border-bottom: 4px solid var(--orange);
+      padding: 48px 64px 40px;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: var(--orange);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    .hero h1 { font-size: 48px; font-weight: 800; color: white; margin-bottom: 10px; }
+    .hero h1 span { color: var(--orange); }
+    .hero p { color: var(--mid-gray); font-size: 15px; max-width: 700px; margin-bottom: 6px; }
+
+    /* CONTAINER */
+    .container { max-width: 1140px; margin: 0 auto; padding: 56px 32px; }
+
+    /* SECTION TITLE */
+    .section-title {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--orange);
+      margin-bottom: 28px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: #DDD; }
+
+    /* ARCHITECTURE DIAGRAM */
+    .arch {
+      background: var(--dark);
+      border-radius: 14px;
+      padding: 40px;
+      margin-bottom: 56px;
+      font-family: 'SF Mono', 'Consolas', monospace;
+      font-size: 13px;
+      color: #C8C8E0;
+      line-height: 2;
+    }
+    .arch .orange { color: var(--orange); font-weight: 700; }
+    .arch .green  { color: var(--green);  font-weight: 700; }
+    .arch .blue   { color: #74B9FF;       font-weight: 700; }
+    .arch .gray   { color: var(--mid-gray); }
+    .arch .white  { color: white;          font-weight: 700; }
+
+    /* AGENT CARDS GRID */
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+    .agent-card {
+      background: white;
+      border-radius: 12px;
+      border: 2px solid #E8E8F0;
+      overflow: hidden;
+      transition: border-color .2s, box-shadow .2s, transform .15s;
+      cursor: default;
+    }
+    .agent-card:hover {
+      border-color: var(--orange);
+      box-shadow: 0 8px 32px rgba(250,70,22,.12);
+      transform: translateY(-2px);
+    }
+    .agent-card-header {
+      padding: 20px 24px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      border-bottom: 1px solid #F0F0F5;
+    }
+    .agent-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .agent-card-header h3 { font-size: 16px; font-weight: 700; margin-bottom: 3px; }
+    .agent-card-header p { font-size: 12px; color: var(--mid-gray); }
+    .agent-card-body { padding: 18px 24px 20px; }
+    .agent-card-body ul { list-style: none; }
+    .agent-card-body li {
+      font-size: 13px;
+      padding: 5px 0;
+      border-bottom: 1px solid #F8F8FA;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: var(--text);
+    }
+    .agent-card-body li:last-child { border-bottom: none; }
+    .agent-card-body li::before { content: '→'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+    .agent-card-footer {
+      padding: 12px 24px;
+      background: var(--off-white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .time-badge {
+      background: var(--dark);
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .priority-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .p-high   { background: #FFE8E8; color: var(--red); }
+    .p-med    { background: #FFF3CD; color: #856404; }
+    .p-low    { background: #E8F8F0; color: var(--green); }
+    .status-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .s-done    { background: #E8F8F0; color: var(--green); }
+    .s-next    { background: var(--orange-bg); color: var(--orange); }
+    .s-planned { background: #F0F0F5; color: var(--mid-gray); }
+
+    /* HOW AGENTS DIFFER FROM SKILLS */
+    .compare-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 56px; }
+    .compare-table th {
+      background: var(--dark); color: white;
+      padding: 12px 18px; text-align: left;
+      font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .compare-table td { padding: 12px 18px; border-bottom: 1px solid #F0F0F5; }
+    .compare-table tr:nth-child(even) td { background: var(--off-white); }
+    .compare-table .yes { color: var(--green); font-weight: 700; }
+    .compare-table .no  { color: var(--mid-gray); }
+
+    /* BUILD ORDER */
+    .build-order {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+    .build-item {
+      background: white;
+      border-radius: 10px;
+      border: 1px solid #E8E8F0;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .build-num {
+      width: 44px; height: 44px;
+      background: var(--dark);
+      color: var(--orange);
+      font-size: 20px;
+      font-weight: 800;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .build-item.done .build-num { background: var(--green); color: white; }
+    .build-info { flex: 1; }
+    .build-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+    .build-info p  { font-size: 13px; color: var(--mid-gray); }
+    .build-item .connector {
+      position: absolute; left: 22px;
+      width: 2px; height: 16px;
+      background: #DDD;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      border-top: 3px solid var(--orange);
+      padding: 24px 64px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer span { color: var(--mid-gray); font-size: 13px; }
+    footer strong { color: white; }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Partner Success AI Toolkit · Agent Ecosystem</div>
+  <h1>From Skills to <span>Agents</span></h1>
+  <p>Skills handle one task. Agents handle entire workflows — searching, deciding, creating, and exporting without you lifting a finger.</p>
+  <p style="margin-top:12px; color:#C0C0D8; font-size:13px;">UiPath Partner Success · Built by Mihai Gavan · 2026-06-11</p>
+</div>
+
+<div class="container">
+
+  <!-- SKILLS VS AGENTS -->
+  <div class="section-title">Skills vs Agents — What's the Difference</div>
+  <table class="compare-table">
+    <thead>
+      <tr><th>Capability</th><th>Skills (slash commands)</th><th>Agents (autonomous workflows)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>You give it data</td><td class="yes">✓ You paste it in</td><td class="yes">✓ It fetches data itself</td></tr>
+      <tr><td>Searches SharePoint</td><td class="yes">✓ On your command</td><td class="yes">✓ Automatically, multi-source</td></tr>
+      <tr><td>Multi-step reasoning</td><td class="no">Single pass</td><td class="yes">✓ Iterates, self-corrects</td></tr>
+      <tr><td>Generates files</td><td class="yes">✓ With export step</td><td class="yes">✓ Automatically creates PPTX, HTML, docs</td></tr>
+      <tr><td>Runs on a schedule</td><td class="no">Manual only</td><td class="yes">✓ Can run weekly/daily automatically</td></tr>
+      <tr><td>Chains tools together</td><td class="no">One tool at a time</td><td class="yes">✓ Search → Analyse → Generate → Export → Notify</td></tr>
+      <tr><td>Human input needed</td><td class="yes">Yes — you drive it</td><td class="yes">Minimal — just the trigger</td></tr>
+      <tr><td>Best for</td><td>Structured, repeatable tasks</td><td>Complex workflows that span hours of manual work</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ARCHITECTURE -->
+  <div class="section-title">Ecosystem Architecture</div>
+  <div class="arch">
+    <div>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="white">PARTNER SUCCESS AI AGENT ECOSYSTEM</span><br><br>
+    </div>
+    <div>
+      <span class="gray">&nbsp;DATA SOURCES &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OUTPUTS</span>
+    </div>
+    <div>
+      <span class="blue">&nbsp;SharePoint (72k docs)</span><span class="gray"> ─────────────────────────────────────────────────────── </span><span class="orange">PPTX decks</span><br>
+      <span class="blue">&nbsp;Power BI (metrics)</span><span class="gray"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="orange">HTML docs</span><br>
+      <span class="blue">&nbsp;Outlook / Calendar</span><span class="gray">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="white">AGENTS</span><span class="gray"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="orange">Emails / digests</span><br>
+      <span class="blue">&nbsp;Your input / paste</span><span class="gray"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="orange">SharePoint saves</span>
+    </div>
+  </div>
+
+  <!-- AGENT CATALOG -->
+  <div class="section-title">The 6 Agents We're Building</div>
+  <div class="agents-grid">
+
+    <!-- AGENT 1 -->
+    <div class="agent-card">
+      <div class="agent-card-header">
+        <div class="agent-icon" style="background:#FFF0EB;">🎨</div>
+        <div>
+          <h3>/deck-builder</h3>
+          <p>Presentation Factory</p>
+        </div>
+      </div>
+      <div class="agent-card-body">
+        <ul>
+          <li>Any topic → full branded PPTX in seconds</li>
+          <li>All Hands, Sales Decks, Exec Briefings, Roadshows, Partner Pitches</li>
+          <li>Pulls real content from SharePoint automatically</li>
+          <li>Consistent UiPath styling, no blank slide anxiety</li>
+        </ul>
+      </div>
+      <div class="agent-card-footer">
+        <span class="time-badge">Saves 3–4h / deck</span>
+        <span class="priority-badge p-high">High Priority</span>
+      </div>
+    </div>
+
+    <!-- AGENT 2 -->
+    <div class="agent-card">
+      <div class="agent-card-header">
+        <div class="agent-icon" style="background:#E8F5FF;">🎙️</div>
+        <div>
+          <h3>/meeting-intel</h3>
+          <p>Meeting Intelligence Agent</p>
+        </div>
+      </div>
+      <div class="agent-card-body">
+        <ul>
+          <li>Paste transcript or rough notes → full structured output</li>
+          <li>Extracts: decisions, action items, risks, open questions</li>
+          <li>Generates next meeting agenda automatically</li>
+          <li>Saves output back to SharePoint</li>
+        </ul>
+      </div>
+      <div class="agent-card-footer">
+        <span class="time-badge">Saves 30–60min / meeting</span>
+        <span class="priority-badge p-high">High Priority</span>
+      </div>
+    </div>
+
+    <!-- AGENT 3 -->
+    <div class="agent-card">
+      <div class="agent-card-header">
+        <div class="agent-icon" style="background:#E8F8F0;">💡</div>
+        <div>
+          <h3>/idea-machine</h3>
+          <p>Idea &amp; Business Case Generator</p>
+        </div>
+      </div>
+      <div class="agent-card-body">
+        <ul>
+          <li>Give it a problem or challenge → 10 ranked ideas with rationale</li>
+          <li>Generates full business case for each idea</li>
+          <li>Checks SharePoint for existing work on the topic</li>
+          <li>Outputs as slides, doc, or email</li>
+        </ul>
+      </div>
+      <div class="agent-card-footer">
+        <span class="time-badge">Saves 2h / ideation session</span>
+        <span class="priority-badge p-med">Medium Priority</span>
+      </div>
+    </div>
+
+    <!-- AGENT 4 -->
+    <div class="agent-card">
+      <div class="agent-card-header">
+        <div class="agent-icon" style="background:#F3E8FF;">🔄</div>
+        <div>
+          <h3>/content-remix</h3>
+          <p>Content Repurposing Agent</p>
+        </div>
+      </div>
+      <div class="agent-card-body">
+        <ul>
+          <li>One doc → 6 formats instantly</li>
+          <li>Exec summary, email, FAQ, slides, LinkedIn post, talking points</li>
+          <li>Point it at any SharePoint doc</li>
+          <li>Adapts tone per audience (partner, CFO, PSM, customer)</li>
+        </ul>
+      </div>
+      <div class="agent-card-footer">
+        <span class="time-badge">Saves 1–2h / content piece</span>
+        <span class="priority-badge p-med">Medium Priority</span>
+      </div>
+    </div>
+
+    <!-- AGENT 5 -->
+    <div class="agent-card">
+      <div class="agent-card-header">
+        <div class="agent-icon" style="background:#FFF8E8;">📊</div>
+        <div>
+          <h3>/partner-pulse</h3>
+          <p>Partner Health Monitor</p>
+        </div>
+      </div>
+      <div class="agent-card-body">
+        <ul>
+          <li>Scans all partner data → flags at-risk partners</li>
+          <li>RAG health score for every partner automatically</li>
+          <li>Suggests intervention actions per partner</li>
+          <li>Weekly digest delivered to your inbox</li>
+        </ul>
+      </div>
+      <div class="agent-card-footer">
+        <span class="time-badge">Saves 3h / week monitoring</span>
+        <span class="priority-badge p-med">Medium Priority</span>
+      </div>
+    </div>
+
+    <!-- AGENT 6 -->
+    <div class="agent-card">
+      <div class="agent-card-header">
+        <div class="agent-icon" style="background:#FFE8E8;">🚨</div>
+        <div>
+          <h3>/escalation-handler</h3>
+          <p>Escalation Triage Agent</p>
+        </div>
+      </div>
+      <div class="agent-card-body">
+        <ul>
+          <li>Paste escalation details → instant structured response plan</li>
+          <li>Classifies severity, finds similar past cases in SharePoint</li>
+          <li>Generates stakeholder comms, RACI, timeline</li>
+          <li>Drafts partner-facing and internal messages</li>
+        </ul>
+      </div>
+      <div class="agent-card-footer">
+        <span class="time-badge">Saves 1h / escalation</span>
+        <span class="priority-badge p-low">Lower Priority</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BUILD ORDER -->
+  <div class="section-title">Recommended Build Order</div>
+  <div class="build-order">
+    <div class="build-item done">
+      <div class="build-num">✓</div>
+      <div class="build-info">
+        <h4>/qbr-prep &nbsp;<span style="font-size:12px;background:#E8F8F0;color:var(--green);padding:2px 8px;border-radius:4px;">Done</span></h4>
+        <p>QBR Draft Generator — the foundation. SharePoint integration live, PPTX export working, HTML docs created.</p>
+      </div>
+    </div>
+    <div class="build-item">
+      <div class="build-num" style="background:var(--orange);color:white;">2</div>
+      <div class="build-info">
+        <h4>/deck-builder &nbsp;<span style="font-size:12px;background:var(--orange-bg);color:var(--orange);padding:2px 8px;border-radius:4px;">Build Next</span></h4>
+        <p>Biggest time saver. Generates any presentation type from a prompt — All Hands, Sales Deck, Exec Briefing, Partner Roadshow. Reuses the PPTX engine already built.</p>
+      </div>
+    </div>
+    <div class="build-item">
+      <div class="build-num">3</div>
+      <div class="build-info">
+        <h4>/meeting-intel</h4>
+        <p>Every partner meeting → structured output automatically. Integrates with Outlook calendar to pull upcoming meeting context.</p>
+      </div>
+    </div>
+    <div class="build-item">
+      <div class="build-num">4</div>
+      <div class="build-info">
+        <h4>/idea-machine</h4>
+        <p>When you need to brainstorm for a new program, proposal, or initiative — 10 ranked ideas with business cases in 60 seconds.</p>
+      </div>
+    </div>
+    <div class="build-item">
+      <div class="build-num">5</div>
+      <div class="build-info">
+        <h4>/content-remix</h4>
+        <p>Repurpose any SharePoint doc into 6 formats. Multiplies every piece of content the team creates.</p>
+      </div>
+    </div>
+    <div class="build-item">
+      <div class="build-num">6</div>
+      <div class="build-info">
+        <h4>/partner-pulse + /escalation-handler</h4>
+        <p>Monitoring and triage — needs Power BI integration first (Track 3) to be truly powerful.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>Part of the <strong>UiPath Partner Success AI Toolkit</strong></span>
+  <span>Agent Ecosystem v1.0 · 2026-06-11</span>
+  <span>Built by <strong>Mihai Gavan</strong></span>
+</footer>
+
+</body>
+</html>

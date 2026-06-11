@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>/qbr-prep — UiPath Partner Success AI Toolkit</title>
+  <style>
+    :root {
+      --orange:      #FA4616;
+      --dark:        #1C1C2E;
+      --dark-card:   #2A2A42;
+      --white:       #FFFFFF;
+      --off-white:   #F5F5F7;
+      --mid-gray:    #8888AA;
+      --text:        #1A1A2E;
+      --green:       #2ECC71;
+      --yellow:      #F39C12;
+      --red:         #E74C3C;
+      --orange-bg:   #FFF0EB;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--off-white);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    .hero {
+      background: var(--dark);
+      padding: 48px 64px 40px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 40px;
+      border-bottom: 4px solid var(--orange);
+    }
+    .hero-left { flex: 1; }
+    .skill-tag {
+      display: inline-block;
+      background: var(--orange);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: 56px;
+      font-weight: 800;
+      color: var(--orange);
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .hero h2 {
+      font-size: 20px;
+      font-weight: 400;
+      color: white;
+      margin-bottom: 8px;
+    }
+    .hero p {
+      font-size: 14px;
+      color: var(--mid-gray);
+    }
+    .hero-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 200px;
+    }
+    .stat-box {
+      background: var(--dark-card);
+      border-left: 3px solid var(--orange);
+      padding: 12px 18px;
+      border-radius: 6px;
+    }
+    .stat-box .val {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+    }
+    .stat-box .lbl {
+      font-size: 12px;
+      color: var(--mid-gray);
+      margin-top: 3px;
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 32px;
+    }
+
+    /* ── SECTION TITLES ── */
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #DDD;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .flow {
+      display: flex;
+      gap: 0;
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .flow-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    .flow-step::after {
+      content: '→';
+      position: absolute;
+      right: -14px;
+      top: 14px;
+      font-size: 20px;
+      color: var(--orange);
+      font-weight: 700;
+      z-index: 2;
+    }
+    .flow-step:last-child::after { display: none; }
+    .step-num {
+      width: 36px;
+      height: 36px;
+      background: var(--orange);
+      color: white;
+      font-weight: 800;
+      font-size: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+    .step-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .step-sub {
+      font-size: 11px;
+      color: var(--mid-gray);
+      padding: 0 8px;
+    }
+
+    /* ── TWO COLS ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 28px;
+      border: 1px solid #E8E8F0;
+    }
+    .card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--orange);
+      display: inline-block;
+    }
+
+    /* ── CODE BLOCKS ── */
+    .code-block {
+      background: var(--dark);
+      color: #E8E8F0;
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+      font-size: 13px;
+      margin-bottom: 8px;
+      border-left: 3px solid var(--orange);
+    }
+    .code-block .comment {
+      color: var(--mid-gray);
+      font-size: 11px;
+      display: block;
+      margin-top: 4px;
+    }
+
+    /* ── OUTPUT SECTIONS LIST ── */
+    .output-list { list-style: none; }
+    .output-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #F0F0F5;
+      font-size: 14px;
+    }
+    .output-list li:last-child { border-bottom: none; }
+    .output-num {
+      width: 22px;
+      height: 22px;
+      background: var(--orange);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .output-list li strong { display: block; font-weight: 600; }
+    .output-list li span { color: var(--mid-gray); font-size: 12px; }
+
+    /* ── KPI TABLE ── */
+    .kpi-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .kpi-table th {
+      background: var(--dark);
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .kpi-table td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #F0F0F5;
+      vertical-align: middle;
+    }
+    .kpi-table tr:nth-child(even) td { background: var(--off-white); }
+    .kpi-table tr:hover td { background: var(--orange-bg); }
+    .target-badge {
+      background: var(--dark);
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .source-tag {
+      font-size: 11px;
+      color: var(--mid-gray);
+      font-style: italic;
+    }
+
+    /* ── EXPORT FORMATS ── */
+    .formats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .format-card {
+      background: white;
+      border: 1px solid #E8E8F0;
+      border-radius: 10px;
+      padding: 20px 16px;
+      text-align: center;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .format-card:hover {
+      border-color: var(--orange);
+      box-shadow: 0 4px 16px rgba(250,70,22,0.1);
+    }
+    .format-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    .format-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+    .format-card p { font-size: 12px; color: var(--mid-gray); }
+
+    /* ── SHARE SECTION ── */
+    .share-section {
+      background: var(--dark);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px;
+    }
+    .share-method h4 {
+      color: var(--orange);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .share-method p {
+      color: #C0C0D8;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    /* ── LIMITATIONS ── */
+    .limit-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .limit-table th {
+      background: var(--dark);
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .limit-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #F0F0F5;
+    }
+    .limit-table tr:nth-child(even) td { background: var(--off-white); }
+
+    /* ── FILE MAP ── */
+    .file-map {
+      background: var(--dark);
+      color: #C8C8E0;
+      font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+      font-size: 13px;
+      padding: 28px 32px;
+      border-radius: 10px;
+      line-height: 2;
+      margin-bottom: 48px;
+    }
+    .file-map .highlight { color: var(--orange); font-weight: 700; }
+    .file-map .comment { color: var(--mid-gray); }
+
+    /* ── ROADMAP ── */
+    .roadmap-list { list-style: none; }
+    .roadmap-list li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid #F0F0F5;
+      font-size: 14px;
+    }
+    .roadmap-list li:last-child { border-bottom: none; }
+    .status-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .status-done    { background: var(--green); }
+    .status-planned { background: #DDD; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 3px solid var(--orange);
+      padding: 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer span { color: var(--mid-gray); font-size: 13px; }
+    footer strong { color: white; }
+
+    /* ── UTILS ── */
+    .tag {
+      display: inline-block;
+      background: var(--orange-bg);
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .mb-24 { margin-bottom: 24px; }
+    .mb-48 { margin-bottom: 48px; }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="skill-tag">Claude Code Skill · Partner Success AI Toolkit</div>
+    <h1>/qbr-prep</h1>
+    <h2>QBR Draft Generator</h2>
+    <p>UiPath Partner Success · v1.0 · Built by Mihai Gavan · 2026-06-11</p>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-box"><div class="val">~2–3h</div><div class="lbl">saved per QBR</div></div>
+    <div class="stat-box"><div class="val">12 KPIs</div><div class="lbl">auto-scored RAG</div></div>
+    <div class="stat-box"><div class="val">9 sections</div><div class="lbl">in every output</div></div>
+    <div class="stat-box"><div class="val">4 formats</div><div class="lbl">export options</div></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ── HOW IT WORKS ── -->
+  <div class="section-title">How It Works</div>
+  <div class="flow mb-48">
+    <div class="flow-step">
+      <div class="step-num">1</div>
+      <div class="step-title">You type /qbr-prep</div>
+      <div class="step-sub">With partner name + any data you have</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">2</div>
+      <div class="step-title">Claude asks for inputs</div>
+      <div class="step-sub">Partner tier, quarter, region, PSM name</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">3</div>
+      <div class="step-title">SharePoint searched</div>
+      <div class="step-sub">Finds past QBRs, account docs, templates automatically</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">4</div>
+      <div class="step-title">Full QBR generated</div>
+      <div class="step-sub">9 sections, 12 KPIs, RAG status, action plan</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">5</div>
+      <div class="step-title">Choose export format</div>
+      <div class="step-sub">Slides · Word · Email · Action items</div>
+    </div>
+  </div>
+
+  <!-- ── USAGE + OUTPUT ── -->
+  <div class="two-col mb-48">
+    <div class="card">
+      <h3>How to Use It</h3>
+      <div class="code-block">
+        /qbr-prep
+        <span class="comment">Interactive mode — Claude asks for everything</span>
+      </div>
+      <div class="code-block">
+        /qbr-prep Partner: Accenture | Tier: Strategic | Q2 FY27
+        <span class="comment">Pass context upfront — fastest</span>
+      </div>
+      <div class="code-block">
+        /qbr-prep [paste raw notes, emails, Salesforce data]
+        <span class="comment">Paste anything raw — Claude extracts structure</span>
+      </div>
+      <div class="code-block">
+        /qbr-prep [describe: internal CFO review, use mock data]
+        <span class="comment">Works for internal exec reviews too</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Output Sections</h3>
+      <ul class="output-list">
+        <li><div class="output-num">1</div><div><strong>Executive Summary</strong><span>Headline result · Relationship Health 🟢🟡🔴</span></div></li>
+        <li><div class="output-num">2</div><div><strong>Partner Health Scorecard</strong><span>12 KPIs with RAG status and YoY trend</span></div></li>
+        <li><div class="output-num">3</div><div><strong>Performance Review</strong><span>Revenue · Pipeline · Agentic · Tech Health · Support</span></div></li>
+        <li><div class="output-num">4</div><div><strong>Strategic Alignment</strong><span>FY28/29 motions — where partner plays, the gaps</span></div></li>
+        <li><div class="output-num">5</div><div><strong>Joint Wins &amp; Highlights</strong><span>Top wins with impact and team credit</span></div></li>
+        <li><div class="output-num">6</div><div><strong>Challenges &amp; Risks</strong><span>Risk register with owners and mitigations</span></div></li>
+        <li><div class="output-num">7</div><div><strong>Joint Action Plan</strong><span>90-day actions · owners · due dates · success metrics</span></div></li>
+        <li><div class="output-num">8</div><div><strong>Commitments</strong><span>UiPath commits / Partner commits</span></div></li>
+        <li><div class="output-num">9</div><div><strong>Next QBR</strong><span>Date · agenda focus · exec sponsor</span></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── KPI FRAMEWORK ── -->
+  <div class="section-title">KPI Framework</div>
+  <div style="background:white; border-radius:10px; border:1px solid #E8E8F0; overflow:hidden; margin-bottom:48px;">
+    <table class="kpi-table">
+      <thead>
+        <tr><th>KPI</th><th>FY Target</th><th>Source Document</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Partner Churn Rate</td><td><span class="target-badge">&lt;10% · 15–20% reduction</span></td><td class="source-tag">Strategic Partner Model</td></tr>
+        <tr><td>Net Revenue Retention</td><td><span class="target-badge">+10% YoY</span></td><td class="source-tag">Strategic Partner Model</td></tr>
+        <tr><td>Technical Health Score</td><td><span class="target-badge">&gt;85%</span></td><td class="source-tag">Strategic Partner Model</td></tr>
+        <tr><td>Partner-Sourced ARR Growth</td><td><span class="target-badge">+25% YoY</span></td><td class="source-tag">QBR Proposal — May 2026</td></tr>
+        <tr><td>Agentic Certification Growth</td><td><span class="target-badge">+50% YoY</span></td><td class="source-tag">Strategic Partner Model</td></tr>
+        <tr><td>Migration Success Rate</td><td><span class="target-badge">&gt;90%</span></td><td class="source-tag">Strategic Partner Model</td></tr>
+        <tr><td>RSI / GSI Competency Growth</td><td><span class="target-badge">+20% YoY</span></td><td class="source-tag">Strategic Partner Model</td></tr>
+        <tr><td>Partner Portal Logins</td><td><span class="target-badge">15,000 / month</span></td><td class="source-tag">Strategic Partner Model</td></tr>
+        <tr><td>Artifact Reuse Rate</td><td><span class="target-badge">≥60%</span></td><td class="source-tag">Strategic Goals Addendum</td></tr>
+        <tr><td>QBR NPS</td><td><span class="target-badge">&gt;80</span></td><td class="source-tag">QBR Proposal — May 2026</td></tr>
+        <tr><td>Support SLA Compliance (P1/P2)</td><td><span class="target-badge">&gt;95%</span></td><td class="source-tag">Standard SLA</td></tr>
+        <tr><td>Program Gross Margin</td><td><span class="target-badge">&gt;65%</span></td><td class="source-tag">CFO Deck — Nov 2025</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── EXPORT FORMATS ── -->
+  <div class="section-title">Export Formats</div>
+  <div class="formats-grid">
+    <div class="format-card">
+      <div class="format-icon">📊</div>
+      <h4>PowerPoint-ready</h4>
+      <p>Slide-by-slide bullet structure — paste straight into your deck</p>
+    </div>
+    <div class="format-card">
+      <div class="format-icon">📄</div>
+      <h4>Word / Exec Doc</h4>
+      <p>Clean formatted document ready to share or print</p>
+    </div>
+    <div class="format-card">
+      <div class="format-icon">✉️</div>
+      <h4>Pre-read Email</h4>
+      <p>Send to attendees before the partner meeting</p>
+    </div>
+    <div class="format-card">
+      <div class="format-icon">✅</div>
+      <h4>Action Items Only</h4>
+      <p>Clean task list for Teams, email, or project tracker</p>
+    </div>
+  </div>
+
+  <!-- ── SHARE WITH TEAM ── -->
+  <div class="section-title">Share With Your Team</div>
+
+  <!-- One-line install banner -->
+  <div style="background:#1C1C2E; border-radius:12px; border:2px solid #FA4616; padding:32px 36px; margin-bottom:20px;">
+    <div style="display:flex; align-items:center; gap:16px; margin-bottom:18px;">
+      <div style="background:#FA4616; color:white; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 12px; border-radius:4px; white-space:nowrap;">One-Command Install</div>
+      <p style="color:#8888AA; font-size:13px; margin:0;">Teammates download <code style="color:#FA4616; background:#2A2A42; padding:2px 6px; border-radius:3px;">install.sh</code> from SharePoint and run a single command — no setup, no zipping, no copying files.</p>
+    </div>
+    <div style="background:#0E0E1E; border-radius:8px; padding:16px 20px; font-family:'SF Mono','Fira Code',monospace; font-size:14px; color:#FA4616; margin-bottom:16px; border-left:3px solid #FA4616;">
+      bash install.sh
+    </div>
+    <div style="color:#8888AA; font-size:12px;">
+      <strong style="color:white;">What it does:</strong>
+      &nbsp;✅ Installs /qbr-prep &nbsp;·&nbsp; ✅ Installs /deck-builder &nbsp;·&nbsp; ✅ Installs the PPTX engine &nbsp;·&nbsp; ✅ Installs python-pptx &nbsp;·&nbsp; ✅ Guides through Microsoft 365 MCP setup
+    </div>
+  </div>
+
+  <div class="share-section mb-48">
+    <div class="share-method">
+      <h4>Step 1 — Download install.sh</h4>
+      <p>Get the installer from SharePoint:</p>
+      <div class="code-block" style="font-size:12px;">Team Internal/ → install.sh</div>
+      <p style="margin-top:10px; font-size:12px; color:#8888AA;">Or ask Mihai to share it directly via Teams.</p>
+    </div>
+    <div class="share-method">
+      <h4>Step 2 — Run in Terminal</h4>
+      <p>Open Terminal, navigate to the download folder, then:</p>
+      <div class="code-block" style="font-size:12px;">bash install.sh</div>
+      <p style="margin-top:10px; font-size:12px; color:#8888AA;">Takes under 30 seconds. Works on Mac and Linux.</p>
+    </div>
+    <div class="share-method">
+      <h4>Step 3 — Connect SharePoint</h4>
+      <p style="margin-bottom:6px;">In Claude Code, type <strong style="color:white;">/mcp</strong> and connect:</p>
+      <p style="margin-bottom:4px; font-size:13px;">→ <strong style="color:white;">claude.ai Microsoft 365</strong></p>
+      <p style="font-size:12px; color:#8888AA;">Sign in with your UiPath account. One-time setup.</p>
+    </div>
+  </div>
+
+  <!-- ── LIMITATIONS ── -->
+  <div class="section-title">Limitations &amp; Workarounds</div>
+  <div style="background:white; border-radius:10px; border:1px solid #E8E8F0; overflow:hidden; margin-bottom:48px;">
+    <table class="limit-table">
+      <thead>
+        <tr><th>Limitation</th><th>Workaround</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>SharePoint MCP is read-only — cannot auto-upload</td><td>Drag file from <code>exports/</code> to SharePoint, or set up OneDrive sync</td></tr>
+        <tr><td>Metrics are mock unless you paste real data</td><td>Connect Power BI agent (Track 3) for live numbers</td></tr>
+        <tr><td>Skill works best with specific partner data</td><td>The more you paste in, the better the output</td></tr>
+        <tr><td>PPTX uses python-pptx — not UiPath master template</td><td>Apply your brand template in PowerPoint after generation</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── FILE MAP ── -->
+  <div class="section-title">File Reference</div>
+  <div class="file-map">
+    ClaudeCode-PB/<br>
+    ├── <span class="highlight">install.sh</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">← One-command installer — share this with teammates</span><br>
+    ├── <span class="highlight">.claude/commands/qbr-prep.md</span> &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">← THE SKILL (what /qbr-prep runs)</span><br>
+    ├── <span class="highlight">docs/qbr-prep.html</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">← This documentation</span><br>
+    └── exports/<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;├── <span class="highlight">generate_qbr_pptx.py</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">← PPTX generator script</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;└── <span class="highlight">QBR_CFO_Review_Q2_FY27.pptx</span> &nbsp;<span class="comment">← Example output</span><br>
+    <br>
+    After running install.sh, teammates get:<br>
+    ~/.claude/commands/qbr-prep.md &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">← Global skill (works in any project)</span><br>
+    ~/.claude/commands/deck-builder.md &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">← Presentation factory skill</span><br>
+    ~/.claude/ps-toolkit/agents/deck-builder/ <span class="comment">← PPTX engine</span><br>
+    ~/.claude/ps-toolkit/exports/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">← Generated decks land here</span>
+  </div>
+
+  <!-- ── ROADMAP ── -->
+  <div class="section-title">Roadmap</div>
+  <div class="card mb-48">
+    <ul class="roadmap-list">
+      <li><div class="status-dot status-done"></div><strong>QBR generation</strong> &nbsp;<span class="tag">Done</span></li>
+      <li><div class="status-dot status-done"></div><strong>SharePoint auto-search</strong> &nbsp;<span class="tag">Done</span></li>
+      <li><div class="status-dot status-done"></div><strong>PowerPoint export (.pptx)</strong> &nbsp;<span class="tag">Done</span></li>
+      <li><div class="status-dot status-done"></div><strong>HTML documentation</strong> &nbsp;<span class="tag">Done</span></li>
+      <li><div class="status-dot status-planned"></div><strong>Power BI live data</strong> &nbsp;— auto-pulls real metrics into every QBR &nbsp;<span class="tag" style="background:#F0F0F5;color:#888;">Planned · Track 3</span></li>
+      <li><div class="status-dot status-planned"></div><strong>Salesforce pipeline pull</strong> &nbsp;— real sourced/influenced numbers &nbsp;<span class="tag" style="background:#F0F0F5;color:#888;">Planned · Track 3</span></li>
+      <li><div class="status-dot status-planned"></div><strong>Auto-save to SharePoint</strong> &nbsp;— outputs land in the right folder automatically &nbsp;<span class="tag" style="background:#F0F0F5;color:#888;">Planned · Track 4</span></li>
+      <li><div class="status-dot status-planned"></div><strong>Teams / email delivery</strong> &nbsp;— send pre-read directly from the skill &nbsp;<span class="tag" style="background:#F0F0F5;color:#888;">Planned · Track 5</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span>Part of the <strong>UiPath Partner Success AI Toolkit</strong></span>
+  <span>Built by <strong>Mihai Gavan</strong> · v1.0 · 2026-06-11</span>
+  <span>Skill file: <strong>.claude/commands/qbr-prep.md</strong></span>
+</footer>
+
+</body>
+</html>
