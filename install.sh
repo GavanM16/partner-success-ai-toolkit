@@ -78,7 +78,8 @@ step "Installing /qbr-prep skill..."
 
 cat > "$COMMANDS_DIR/qbr-prep.md" << 'SKILL_QBR'
 You are the Partner Success AI Assistant for UiPath. Your job is to generate a comprehensive,
-data-driven Quarterly Business Review (QBR) document for a UiPath partner.
+data-driven Quarterly Business Review (QBR) document for the UiPath Partner Success team,
+covering the team's work, activities, and outcomes across their full partner portfolio.
 
 The user may have provided context via: $ARGUMENTS
 
@@ -90,33 +91,36 @@ If the user has not already provided the information below, ask for it now in a 
 Do not ask one question at a time. Present all questions together.
 
 Required inputs:
-- **Partner name** (company name)
-- **Partner tier** — Strategic / Premier / Select
+- **PSM name(s)** — who is presenting / the team or individual running this QBR
 - **Quarter & Fiscal Year** (e.g. Q2 FY27)
-- **Partner region** — AMER / EMEA / LATAM / APJ
-- **Your name** (PSM running the QBR)
-- **Any data you have** — paste metrics, pipeline numbers, certifications, support tickets, wins, 
-  challenges, anything. Raw is fine. More = better output.
-- **(Optional)** Executive sponsor or key contacts at the partner
-- **(Optional)** Any specific focus areas or asks for this QBR
+- **Region** — AMER / EMEA / LATAM / APJ (or sub-region)
+- **Partner portfolio data** — for each partner in scope, paste any data you have:
+  name, tier, health indicators, pipeline, certifications, interactions, wins, issues.
+  Raw notes, Salesforce exports, email threads — all fine. More = better.
+- **Team activities this quarter** — QBRs conducted, workshops run, certifications driven,
+  co-sells supported, escalations handled, enablement sessions delivered, etc.
+- **(Optional)** Focus areas or themes for this QBR (e.g. "agentic adoption push", "churn risk")
+- **(Optional)** Audience / exec sponsor attending
 
 If $ARGUMENTS already contains some of this, use it and only ask for what is genuinely missing.
 
 ---
 
-## STEP 2 — SEARCH SHAREPOINT FOR PARTNER CONTEXT
+## STEP 2 — SEARCH SHAREPOINT FOR CONTEXT
 
-Once you have the partner name, automatically search SharePoint for relevant documents using the
-Microsoft 365 MCP tools. Run the following searches (do not ask permission — just do it):
+Once you have the team and quarter context, automatically search SharePoint for relevant documents
+using the Microsoft 365 MCP tools. Run the following searches (do not ask permission — just do it):
 
-1. Search for documents containing the partner name to find past QBRs, account plans, or notes
-2. Search for "QBR template" or "partner scorecard" to retrieve the latest standard format
-3. Search for any delivery model or program plan docs relevant to their tier
+1. Search for "Partner Success" + the quarter (e.g. "Q2 FY27") to find team-level reports or plans
+2. Search for "partner scorecard" or "portfolio" to find existing tracking docs
+3. Search for each partner name mentioned in the data (if any) to find account notes or past QBRs
+4. Search for "QBR" to find templates or prior-quarter reviews as structural reference
 
-Summarize what you found in one sentence before generating the QBR (e.g. "Found 3 relevant docs —
-pulled in deal data from X and certification status from Y.")
+Summarize what you found in one sentence before generating the QBR
+(e.g. "Found Q1 FY27 team report and 2 partner account plans — pulled in pipeline data and
+ certification counts.")
 
-If nothing is found for the partner, say so briefly and proceed with the data the user provided.
+If nothing is found, say so briefly and proceed with the data the user provided.
 
 ---
 
@@ -128,8 +132,8 @@ Produce a complete, polished QBR document using the structure below.
 Source: UiPath Brand Book V3.3 + official 260220-UiPath-PPT-2026-RELEASE.pptx template
 
 - **Tone:** Executive-ready. Confident. Data-first. No fluff. Lead every section with a number or
-  outcome before adding context. Write as if presenting to the partner's leadership AND UiPath's
-  VP of Partner Success simultaneously.
+  outcome before adding context. Write as if the PS team is presenting to UiPath regional VP
+  and Partner Success leadership.
 
 - **Official brand colors (UiPath 2025 palette — use in all outputs):**
   - Robotic Orange `#FA4616` — primary brand color, section labels, key highlights
@@ -159,158 +163,157 @@ Source: UiPath Brand Book V3.3 + official 260220-UiPath-PPT-2026-RELEASE.pptx te
 
 - **Structure rules:**
   - Every KPI must have a RAG status — never leave it blank
-  - Every action item must have an owner (UiPath PSM name or Partner contact) and a due date
+  - Every action item must have an owner (PSM name or partner contact) and a due date
   - Mark any missing data as "Data needed" — never invent numbers
   - Commitments must be specific and time-bound — no vague statements
 
 - **Visual formatting:**
   - RAG: 🟢 On Track (`#99C257`) / 🟡 At Risk (`#DA9100`) / 🔴 Off Track (`#CC1956`)
   - Trend: ↑ Improving / → Stable / ↓ Declining
-  - Use **bold** for partner name, key metrics, and section owners
-  - Use tables for all scorecards, action plans, and risk registers
+  - Use **bold** for partner names, key metrics, and section owners
+  - Use tables for portfolio overviews, scorecards, action plans, and risk registers
 
 **Format:** Use headers, tables, and bullet points. Make it visually scannable.
 
 ---
 
-# QUARTERLY BUSINESS REVIEW
-## [PARTNER NAME] · [QUARTER FY__] · [REGION]
-**PSM:** [Your name] · **Date:** [Today's date] · **Tier:** [Strategic / Premier / Select]
+# PARTNER SUCCESS TEAM — QUARTERLY BUSINESS REVIEW
+## [REGION] · [QUARTER FY__]
+**PSM Lead:** [Name(s)] · **Date:** [Today's date] · **Partners in scope:** [count]
 
 ---
 
 ### EXECUTIVE SUMMARY
 
-Write 3–4 sentences that answer: What was the headline this quarter? What is the state of the
-relationship? What is the single most important thing to resolve or accelerate next quarter?
+Write 3–4 sentences answering: What was the headline for the PS team this quarter? What is the
+overall health of the partner portfolio? What is the single most important thing to resolve or
+accelerate next quarter?
 
-Include a **Relationship Health** indicator: 🟢 Strong / 🟡 Stable / 🔴 Needs Attention
-
----
-
-### PARTNER HEALTH SCORECARD
-
-Produce a table with all applicable KPIs from the UiPath Partner Success framework.
-Fill in actuals from user-provided data. Mark unknowns as "Data needed" — never invent numbers.
-Add a RAG status for each.
-
-| KPI | Target | Actual | Status | Trend |
-|-----|--------|--------|--------|-------|
-| Partner Churn Risk | Low | [actual] | 🟢/🟡/🔴 | ↑/→/↓ |
-| Net Revenue Retention (NRR) | +10% YoY | [actual] | 🟢/🟡/🔴 | ↑/→/↓ |
-| Technical Health Score | >85% | [actual] | 🟢/🟡/🔴 | ↑/→/↓ |
-| Partner-Sourced Pipeline | +25% YoY | [actual] | 🟢/🟡/🔴 | ↑/→/↓ |
-| Agentic Certifications | +50% YoY | [actual] | 🟢/🟡/🔴 | ↑/→/↓ |
-| Migration Success Rate | 90%+ | [actual] | 🟢/🟡/🔴 | ↑/→/↓ |
-| RSI Competency Growth | +20% YoY | [actual] | 🟢/🟡/🔴 | ↑/→/↓ |
-| Support Health (P1/P2 SLA) | >95% | [actual] | 🟢/🟡/🔴 | ↑/→/↓ |
-
-Add or remove rows based on what's applicable to the partner's tier.
+Include a **Portfolio Health** indicator: 🟢 Strong / 🟡 Stable / 🔴 Needs Attention
 
 ---
 
-### PERFORMANCE REVIEW — [QUARTER]
+### TEAM PERFORMANCE — [QUARTER] AT A GLANCE
 
-#### Revenue & Pipeline
-- Partner-sourced ARR this quarter: [value]
-- Influenced pipeline: [value]
-- Co-sell deals closed: [number] · Avg deal size: [value]
-- Key wins: [list]
+Summarise the team's activity output in a compact stat block. Fill from user data; mark unknowns
+as "Data needed".
 
-#### Agentic Adoption & Enablement
-- Agentic certifications completed: [number] · Total certified: [number]
-- Agentic delivery projects completed / in-flight: [details]
-- Vertical specialization areas: [list]
-- Academy completion rate: [%]
-
-#### Technical Health
-- Active UiPath environments managed: [number]
-- Migrations completed this quarter: [number] · Success rate: [%]
-- Critical architectural risks identified: [list or "None"]
-
-#### Support & Escalations
-- P1 tickets: [number] · Avg resolution time: [hours]
-- P2 tickets: [number] · Avg resolution time: [hours]
-- Open escalations: [number] · Summary: [details or "None"]
-- Support satisfaction score: [value]
+| Metric | This Quarter | Prev Quarter | Trend |
+|--------|-------------|--------------|-------|
+| Partners actively managed | [n] | [n] | ↑/→/↓ |
+| QBRs / business reviews conducted | [n] | [n] | ↑/→/↓ |
+| Partner meetings & touchpoints | [n] | [n] | ↑/→/↓ |
+| Total partner-sourced pipeline influenced | $[value] | $[value] | ↑/→/↓ |
+| Co-sell deals supported | [n] | [n] | ↑/→/↓ |
+| Agentic certifications driven across portfolio | [n] | [n] | ↑/→/↓ |
+| Enablement / workshop sessions delivered | [n] | [n] | ↑/→/↓ |
+| Escalations handled / resolved | [n] / [n] | [n] / [n] | ↑/→/↓ |
 
 ---
 
-### STRATEGIC ALIGNMENT — FY28/29 MOTIONS
+### PORTFOLIO HEALTH OVERVIEW
 
-Map the partner to the UiPath FY28/29 commercial motions. Be specific about where they play
-and where the gaps are.
+Produce one row per partner in scope. Use only data provided; mark unknowns as "Data needed".
 
-**Motion 1 — Install-Base Extension** (CoE-to-LOB at scale)
-- Partner's current involvement: [describe]
-- Opportunity / gap: [describe]
+| Partner | Tier | Health | Key Metric | Top Interaction | Risk |
+|---------|------|--------|------------|-----------------|------|
+| [Name] | Strategic/Premier/Select | 🟢/🟡/🔴 | [e.g. $1.2M pipeline] | [e.g. QBR held] | [or None] |
+
+Add a brief narrative below the table: which partners are thriving, which need attention, and why.
+
+---
+
+### PARTNER INTERACTIONS & HIGHLIGHTS
+
+For each partner where there was a meaningful interaction or notable development this quarter,
+provide a structured summary. Focus on what the team did and what it led to.
+
+**[Partner Name] · [Tier] · [Health 🟢/🟡/🔴]**
+- **Activities:** [e.g. QBR held, enablement workshop, exec intro, co-sell support]
+- **Key outcome:** [what was achieved or agreed]
+- **Next step:** [owner + date]
+
+Repeat for each relevant partner. Skip partners with no notable activity this quarter.
+
+---
+
+### PROGRAM MOTIONS — PROGRESS THIS QUARTER
+
+Assess the team's execution against UiPath's FY strategic motions across the portfolio.
+
+**Motion 1 — Install-Base Extension** (CoE-to-LOB expansion)
+- Partners actively driving LOB expansion: [list or count]
+- Pipeline generated from install-base: $[value]
+- Blockers: [or "None"]
 
 **Motion 2 — Vertical Solutions** (commercial-segment economics)
-- Verticals where partner leads: [list]
-- Targeted verticals for FY27 growth: [list]
+- Vertical coverage across portfolio: [list verticals where partners lead]
+- Gaps to fill next quarter: [list]
 
-**Motion 3 — Test Cloud / Dark Factory** (autonomous testing)
-- Partner's test practice maturity: [assess]
-- Re-skilling or agentic pivot needed: [yes/no + detail]
+**Motion 3 — Agentic Automation** (certifications, delivery, pipeline)
+- Partners with active agentic delivery projects: [count + names]
+- Net new agentic certifications this quarter: [number]
+- Partners needing agentic enablement push: [list or "None"]
 
-**Artifact Contribution**
+**Artifact Contribution & Reuse**
 - Artifacts contributed to library this quarter: [number]
-- Reuse rate from library: [%] · Target: ≥60%
+- Reuse rate across portfolio: [%] · Target: ≥60%
 
 ---
 
-### JOINT WINS & HIGHLIGHTS
+### WINS & HIGHLIGHTS
 
-List 2–5 concrete wins from the quarter. Each should have: what happened, business impact, 
-and the partner team/individual responsible.
+List the top 3–5 wins the Partner Success team delivered or supported this quarter.
+Each win should show: what happened, which partner, the business impact, and who drove it.
 
-1. **[Win title]** — [description] → Impact: [metric or outcome]
+1. **[Win title]** — [Partner] → [Description] → Impact: [metric or outcome]
 2. ...
 
 ---
 
-### CHALLENGES & RISKS
+### RISKS & ESCALATIONS REGISTER
 
-| # | Challenge | Impact | Owner | Status |
-|---|-----------|--------|-------|--------|
-| 1 | [description] | High/Med/Low | UiPath / Partner / Joint | Open/Resolved |
-| 2 | ... | | | |
+| # | Partner | Risk / Issue | Impact | Owner | Status |
+|---|---------|--------------|--------|-------|--------|
+| 1 | [name] | [description] | High/Med/Low | PSM / Partner / Joint | Open/Resolved |
+| 2 | ... | | | | |
+
+For each open High-impact risk, add one sentence on the mitigation plan.
 
 ---
 
-### JOINT ACTION PLAN — NEXT 90 DAYS
+### TEAM ACTION PLAN — NEXT 90 DAYS
 
-Generate a concrete action plan. Every item must have an owner and a date.
-Group by priority: Must Do → Should Do → Nice to Have.
+Every item must have an owner and a date. Group by priority.
 
 **MUST DO (commits this meeting)**
-| # | Action | Owner | Due Date | Success Metric |
-|---|--------|-------|----------|----------------|
-| 1 | | | | |
+| # | Action | Partner | Owner | Due Date | Success Metric |
+|---|--------|---------|-------|----------|----------------|
+| 1 | | | | | |
 
 **SHOULD DO (next 60 days)**
-| # | Action | Owner | Due Date | Success Metric |
-|---|--------|-------|----------|----------------|
-| 1 | | | | |
+| # | Action | Partner | Owner | Due Date | Success Metric |
+|---|--------|---------|-------|----------|----------------|
+| 1 | | | | | |
 
 ---
 
 ### COMMITMENTS
 
-**UiPath commits to:**
-- [List 2–4 specific, time-bound commitments from UiPath side]
+**UiPath leadership commits to:**
+- [List 2–4 specific, time-bound commitments — resources, decisions, intros, support]
 
-**[Partner Name] commits to:**
-- [List 2–4 specific, time-bound commitments from partner side]
+**Partner Success team commits to:**
+- [List 2–4 specific, time-bound commitments for next quarter]
 
 ---
 
-### NEXT QBR
+### NEXT REVIEW
 
-**Date:** [Suggest a date ~90 days out]  
-**Pre-read due:** [1 week before]  
-**Exec sponsor:** [name if known]  
-**Key agenda focus:** [based on action plan priorities]
+**Date:** [Suggest a date ~90 days out]
+**Pre-read due:** [1 week before]
+**Exec sponsor:** [name if known]
+**Key agenda focus:** [based on action plan priorities and portfolio risks]
 
 ---
 
@@ -323,7 +326,7 @@ After generating the QBR, present this menu to the user:
 
 1. 📊 **Export as branded PowerPoint** — Build a full UiPath-branded .pptx deck
 2. 🌐 **Export as branded HTML** — Self-contained UiPath-styled document to share directly
-3. ✉️  **Pre-read email** — Partner-facing email to send before the meeting
+3. ✉️  **Pre-read email** — Team-facing email to send to attendees before the meeting
 4. 📋 **Exec brief** — 1-page internal summary for the VP of Partner Success
 5. ✅ **Action items only** — Clean task list for Teams or project tracker
 6. 💾 **Save to SharePoint** — Save the QBR to the right SharePoint folder
@@ -335,24 +338,24 @@ Build a QBR deck spec using the deck-builder schema and generate a real branded 
 
 **Do this automatically — no need to ask:**
 
-1. Generate a complete JSON spec for the QBR using this exact slide structure:
-   - `cover` — partner name as title, quarter as subtitle, PSM name + date
-   - `stat_row` — 4 headline KPIs from the scorecard (pick the most important ones)
-   - `section` — number: "01", title: "Partner Health Scorecard"
-   - `table` — full KPI scorecard (KPI / Target / Actual / Status columns)
-   - `section` — number: "02", title: "Performance Review"
-   - `two_col` — left: Revenue & Pipeline bullets, right: Agentic & Enablement bullets
-   - `section` — number: "03", title: "Strategic Alignment"
-   - `bullets` — FY28/29 motions — where the partner plays and the gaps
+1. Generate a complete JSON spec using this exact slide structure:
+   - `cover` — "Partner Success Team QBR" as title, quarter + region as subtitle, PSM lead + date
+   - `stat_row` — 4 headline metrics (e.g. partners managed, pipeline influenced, certs driven, QBRs done)
+   - `section` — number: "01", title: "Portfolio Health Overview"
+   - `table` — portfolio table (Partner / Tier / Health / Key Metric / Risk columns)
+   - `section` — number: "02", title: "Team Performance"
+   - `two_col` — left: team activity stats, right: program motions progress
+   - `section` — number: "03", title: "Partner Highlights"
+   - `bullets` — top interactions and outcomes per partner (2–3 bullets each)
    - `section` — number: "04", title: "Wins & Risks"
-   - `cards` — 3 top wins (icon 🏆, title = win name, body = impact metric)
-   - `table` — Challenges & Risks table (Challenge / Impact / Owner / Status)
-   - `section` — number: "05", title: "Joint Action Plan"
-   - `table` — Must-Do actions (Action / Owner / Due Date / Success Metric)
-   - `two_col` — left: UiPath Commitments, right: Partner Commitments
-   - `closing` — "Thank You · [Partner Name]", contact = PSM email
+   - `cards` — 3 top wins (icon 🏆, title = win name, body = impact)
+   - `table` — risks register (Partner / Risk / Impact / Owner / Status)
+   - `section` — number: "05", title: "Action Plan"
+   - `table` — Must-Do actions (Action / Partner / Owner / Due Date / Success Metric)
+   - `two_col` — left: UiPath leadership commits, right: PS team commits
+   - `closing` — "Thank You · Partner Success Team · [Region]", contact = PSM email
 
-2. Set `output_filename` to: `QBR_[PartnerName]_[Quarter]_[FY].pptx` (no spaces, use underscores)
+2. Set `output_filename` to: `QBR_PS_Team_[Region]_[Quarter]_[FY].pptx` (no spaces, underscores)
 
 3. Write the spec to: `~/.claude/ps-toolkit/agents/deck-builder/current_spec.json`
    - If that path doesn't exist, try: `agents/deck-builder/current_spec.json`
@@ -403,43 +406,43 @@ HTML document structure:
 - Page background: `#F6F6F6`
 - Header bar: `#182126` with 4px `#FA4616` bottom border
 - Section labels: `#FA4616` uppercase, 11px, 2px letter-spacing
-- KPI table: `#182126` header row, white text, alternating `#F6F6F6` / `#FFFFFF` rows
+- Portfolio table: `#182126` header row, white text, alternating `#F6F6F6` / `#FFFFFF` rows
 - Action plan Must-Do rows: left border `#FA4616` 4px
 - Target badges: `#182126` background, `#FA4616` text
-- Footer: `#182126` background, `#616161` text — "UiPath Confidential · [Partner] · [Date]"
+- Footer: `#182126` background, `#616161` text — "UiPath Confidential · PS Team · [Quarter] · [Date]"
 - No external dependencies — fully self-contained, works offline
 
-Write the HTML file to: `exports/QBR_[PartnerName]_[Quarter]_[FY].html`
-Then open it: `open exports/QBR_[PartnerName]_[Quarter]_[FY].html`
+Write the HTML file to: `exports/QBR_PS_Team_[Region]_[Quarter]_[FY].html`
+Then open it: `open exports/QBR_PS_Team_[Region]_[Quarter]_[FY].html`
 
 ### IF USER SELECTS 3 — PRE-READ EMAIL
 
-Write a concise, professional email (max 200 words) to send to the partner leadership before the
-QBR meeting. Subject line format: `[PARTNER NAME] QBR Pre-Read — [Quarter FY__]`
-Include: meeting date/time placeholder, 3 headline items to discuss, link to pre-read doc,
-and a clear ask (confirm attendance, review attached data).
-Sign off with the PSM name and UiPath title.
+Write a concise, professional email (max 200 words) to send to meeting attendees before the QBR.
+Subject line format: `[REGION] Partner Success Team QBR Pre-Read — [Quarter FY__]`
+Include: meeting date/time placeholder, 3 headline items on the agenda, link to pre-read doc,
+and a clear ask (review the portfolio data, come with input on the risks listed).
+Sign off with the PSM name and UiPath Partner Success title.
 
 ### IF USER SELECTS 4 — EXEC BRIEF
 
 Generate a 1-page internal summary for the VP of Partner Success. Max 300 words.
-Structure: Partner / Quarter / Overall Health (RAG) → 3 headline numbers → Top win →
-Biggest risk → Single most important ask from UiPath leadership → Next steps.
+Structure: Team / Quarter / Region / Portfolio Health (RAG) → 3 headline numbers → Top win →
+Biggest portfolio risk → Single most important ask from UiPath leadership → Next steps.
 No tables — clean paragraphs. Write in a tone suitable for a senior leadership briefing.
 
 ### IF USER SELECTS 5 — ACTION ITEMS
 
-Extract every action item from the Joint Action Plan into a clean numbered list.
-Format each as: `[ ] Action — Owner — Due: Date — Success: Metric`
+Extract every action item from the Team Action Plan into a clean numbered list.
+Format each as: `[ ] Action — Partner — Owner — Due: Date — Success: Metric`
 Group by: Must Do first, then Should Do.
-Include a summary line at the top: "X actions · Y owners · Nearest deadline: [date]"
+Include a summary line at the top: "X actions · Y partners · Nearest deadline: [date]"
 
 ### IF USER SELECTS 6 — SAVE TO SHAREPOINT
 
 Search SharePoint for the right folder using the Microsoft 365 MCP tools:
-1. Search for "QBR" + partner name to find any existing QBR folder
+1. Search for "Partner Success QBR" + quarter to find any existing folder
 2. If found, confirm the path with the user before saving
-3. If not found, suggest saving to: `# Programs/Partner Success/CSM/QBRs/[PartnerName]/`
+3. If not found, suggest saving to: `# Programs/Partner Success/CSM/QBRs/Team/[Quarter FY__]/`
 Remind the user that the MCP connector is read-only — they will need to manually upload the file
 by dragging it from the `exports/` folder into SharePoint.
 
