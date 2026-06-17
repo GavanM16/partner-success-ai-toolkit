@@ -10,22 +10,43 @@ from pptx.util import Inches, Pt, Emu
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN
 
-# ── THEME ────────────────────────────────────────────────────────────────────
+# ── UIPATH 2025 OFFICIAL BRAND PALETTE ───────────────────────────────────────
+# Source: 260220-UiPath-PPT-2026-RELEASE.pptx theme "UiPath 2025"
+# Font: Arial (official presentation font per PPTX master template)
 
 T = {
-    "orange":      RGBColor(0xFA, 0x46, 0x16),
-    "dark":        RGBColor(0x1C, 0x1C, 0x2E),
-    "dark_card":   RGBColor(0x2A, 0x2A, 0x42),
-    "white":       RGBColor(0xFF, 0xFF, 0xFF),
-    "off_white":   RGBColor(0xF5, 0xF5, 0xF7),
-    "mid_gray":    RGBColor(0x88, 0x88, 0xAA),
-    "light_gray":  RGBColor(0xF0, 0xF0, 0xF5),
-    "text":        RGBColor(0x1A, 0x1A, 0x2E),
-    "green":       RGBColor(0x2E, 0xCC, 0x71),
-    "yellow":      RGBColor(0xF3, 0x9C, 0x12),
-    "red":         RGBColor(0xE7, 0x4C, 0x3C),
-    "blue":        RGBColor(0x34, 0x98, 0xDB),
-    "orange_bg":   RGBColor(0xFF, 0xEE, 0xE8),
+    # Primary brand colors
+    "orange":      RGBColor(0xFA, 0x46, 0x16),  # Robotic Orange — accent1, primary CTA
+    "dark":        RGBColor(0x18, 0x21, 0x26),  # Deep Blue — dk2, slide backgrounds
+    "teal":        RGBColor(0x0B, 0xA2, 0xB3),  # Agentic Teal — accent3
+    # Secondary brand colors
+    "dark_blue":   RGBColor(0x1E, 0x64, 0x82),  # Dark Blue — accent2
+    "mid_blue":    RGBColor(0x5B, 0xCB, 0xDE),  # Mid Blue
+    "yellow":      RGBColor(0xDA, 0x91, 0x00),  # Yellow — accent4
+    "magenta":     RGBColor(0xCC, 0x19, 0x56),  # Magenta — accent5
+    "purple":      RGBColor(0x8B, 0x28, 0x8A),  # Testing Purple — accent6
+    "green":       RGBColor(0x99, 0xC2, 0x57),  # Green
+    # Neutrals
+    "white":       RGBColor(0xFF, 0xFF, 0xFF),  # White — lt1
+    "black":       RGBColor(0x00, 0x00, 0x00),  # Black — dk1
+    "dark_grey":   RGBColor(0x61, 0x61, 0x61),  # Dark Grey
+    "darker_grey": RGBColor(0x48, 0x48, 0x48),  # Darker Grey
+    "offset_grey": RGBColor(0xD9, 0xD9, 0xD9),  # Offset Grey — lt2
+    "light_grey":  RGBColor(0xF6, 0xF6, 0xF6),  # Light Grey
+    # Block (darker shade) variants
+    "block_orange":    RGBColor(0xCE, 0x34, 0x0B),  # Block Orange
+    "block_teal":      RGBColor(0x15, 0x83, 0x9A),  # Block Teal
+    "block_deep_blue": RGBColor(0x2D, 0x37, 0x3C),  # Block Deep Blue
+    "slate_blue":      RGBColor(0x43, 0x5D, 0x6B),  # Slate Blue
+    # Aliases used by slide builders
+    "dark_card":   RGBColor(0x2D, 0x37, 0x3C),  # Block Deep Blue (card surfaces)
+    "off_white":   RGBColor(0xF6, 0xF6, 0xF6),  # Light Grey (off-white surfaces)
+    "mid_gray":    RGBColor(0x61, 0x61, 0x61),  # Dark Grey (secondary text)
+    "light_gray":  RGBColor(0xD9, 0xD9, 0xD9),  # Offset Grey (borders)
+    "text":        RGBColor(0x18, 0x21, 0x26),  # Deep Blue (body text on light bg)
+    "red":         RGBColor(0xCC, 0x19, 0x56),  # Magenta used as red/danger
+    "blue":        RGBColor(0x1E, 0x64, 0x82),  # Dark Blue
+    "orange_bg":   RGBColor(0xFF, 0xEE, 0xE8),  # Orange tint background
 }
 
 COLOR_MAP = {
@@ -72,6 +93,7 @@ def txt(slide, text, x, y, w, h, size=Pt(13), bold=False,
     r = p.add_run(); r.text = text
     r.font.size = size; r.font.bold = bold
     r.font.italic = italic; r.font.color.rgb = color
+    r.font.name = "Arial"  # UiPath official presentation font
     return tb
 
 def header(slide, title, subtitle=None):

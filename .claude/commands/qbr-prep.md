@@ -46,9 +46,28 @@ If nothing is found for the partner, say so briefly and proceed with the data th
 Produce a complete, polished QBR document using the structure below.
 
 **UiPath Brand Guidelines — always apply these:**
+Source: UiPath Brand Book V3.3 + official 260220-UiPath-PPT-2026-RELEASE.pptx template
+
 - **Tone:** Executive-ready. Confident. Data-first. No fluff. Lead every section with a number or
   outcome before adding context. Write as if presenting to the partner's leadership AND UiPath's
   VP of Partner Success simultaneously.
+
+- **Official brand colors (UiPath 2025 palette — use in all outputs):**
+  - Robotic Orange `#FA4616` — primary brand color, section labels, key highlights
+  - Deep Blue `#182126` — backgrounds, headers, dark panels
+  - Agentic Teal `#0BA2B3` — secondary accent
+  - Dark Blue `#1E6482` — supporting accent, links
+  - Yellow `#DA9100` — warnings, at-risk
+  - Magenta `#CC1956` — alerts, off-track / danger
+  - Green `#99C257` — on-track, positive
+  - Dark Grey `#616161` — secondary text
+  - Light Grey `#F6F6F6` — surface backgrounds, alternating rows
+  - Offset Grey `#D9D9D9` — borders, dividers
+
+- **Official font:** Arial (all presentations — per UiPath PPTX master template)
+  - Web/HTML fallback: `'Arial', 'Helvetica Neue', sans-serif`
+  - Headings: Bold — body: Regular
+
 - **Language:** Use UiPath-specific terminology throughout:
   - "Agentic automation" not "AI automation"
   - "Partner Success program" not "support program"
@@ -58,14 +77,16 @@ Produce a complete, polished QBR document using the structure below.
   - Tier names: Strategic / Premier / Select (capitalised)
   - FY format: FY27, FY28 (not FY2027)
   - Quarters: Q1/Q2/Q3/Q4 FY27
+
 - **Structure rules:**
   - Every KPI must have a RAG status — never leave it blank
   - Every action item must have an owner (UiPath PSM name or Partner contact) and a due date
   - Mark any missing data as "Data needed" — never invent numbers
   - Commitments must be specific and time-bound — no vague statements
+
 - **Visual formatting:**
-  - Use 🟢 On Track / 🟡 At Risk / 🔴 Off Track for all KPIs
-  - Use ↑ Improving / → Stable / ↓ Declining for trend
+  - RAG: 🟢 On Track (`#99C257`) / 🟡 At Risk (`#DA9100`) / 🔴 Off Track (`#CC1956`)
+  - Trend: ↑ Improving / → Stable / ↓ Declining
   - Use **bold** for partner name, key metrics, and section owners
   - Use tables for all scorecards, action plans, and risk registers
 
@@ -271,16 +292,42 @@ PowerPoint master template on top for full brand compliance.
 
 Generate a complete, self-contained HTML file that looks like a professional UiPath-branded document.
 
-**UiPath brand spec for the HTML:**
-- Background: `#F5F5F7` page, `#FFFFFF` content panels
-- Header bar: `#1C1C2E` (dark navy) with `#FA4616` (orange) bottom border
-- Section headers: `#FA4616` uppercase label + dark divider line
-- KPI tables: dark navy header row, alternating `#F5F5F7` rows, hover `#FFF0EB`
-- RAG indicators: 🟢 use `#2ECC71`, 🟡 use `#F39C12`, 🔴 use `#E74C3C`
-- Target badges: `#1C1C2E` background, `#FA4616` text
-- Action plan table: dark navy header, orange left border on Must-Do rows
-- Font: `-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`
-- Footer: `#1C1C2E` with PSM name, partner name, date, "UiPath Confidential"
+**UiPath 2025 Official Brand Spec (source: UiPath-PPT-2026-RELEASE.pptx + Brand Book V3.3):**
+
+Colors — use ONLY these official hex values:
+- `#FA4616` — Robotic Orange (primary brand, CTAs, section labels, borders)
+- `#182126` — Deep Blue (backgrounds, headers, dark panels)
+- `#0BA2B3` — Agentic Teal (secondary accent, status indicators)
+- `#1E6482` — Dark Blue (links, supporting accent)
+- `#DA9100` — Yellow (warnings, at-risk indicators)
+- `#CC1956` — Magenta (alerts, off-track indicators)
+- `#99C257` — Green (on-track, positive indicators)
+- `#616161` — Dark Grey (secondary text)
+- `#D9D9D9` — Offset Grey (borders, dividers)
+- `#F6F6F6` — Light Grey (alternating rows, background surfaces)
+- `#FFFFFF` — White (content panels, text on dark)
+- `#000000` — Black (primary body text)
+
+Typography:
+- Font family: `'Arial', 'Helvetica Neue', sans-serif` (official PPTX font)
+- Headings: Arial Bold, `#182126` on light / `#FFFFFF` on dark
+- Body text: Arial Regular, `#000000` or `#182126`
+- Labels/caps: Arial Bold, `#FA4616`, letter-spacing: 2px, text-transform: uppercase
+- Data/numbers: Arial Bold, `#FA4616` for highlights
+
+RAG status colors (official):
+- 🟢 On Track: `#99C257` (Green)
+- 🟡 At Risk: `#DA9100` (Yellow)
+- 🔴 Off Track: `#CC1956` (Magenta)
+
+HTML document structure:
+- Page background: `#F6F6F6`
+- Header bar: `#182126` with 4px `#FA4616` bottom border
+- Section labels: `#FA4616` uppercase, 11px, 2px letter-spacing
+- KPI table: `#182126` header row, white text, alternating `#F6F6F6` / `#FFFFFF` rows
+- Action plan Must-Do rows: left border `#FA4616` 4px
+- Target badges: `#182126` background, `#FA4616` text
+- Footer: `#182126` background, `#616161` text — "UiPath Confidential · [Partner] · [Date]"
 - No external dependencies — fully self-contained, works offline
 
 Write the HTML file to: `exports/QBR_[PartnerName]_[Quarter]_[FY].html`
