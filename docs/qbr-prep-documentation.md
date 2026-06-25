@@ -179,36 +179,27 @@ When you provide a partner name, the skill automatically searches:
 Anyone with access to the `ClaudeCode-PB/` project folder already has the skill.
 The skill lives at: `.claude/commands/qbr-prep.md`
 
-### Option 2 — Global install (works in any project)
+### Option 2 — Global install (no project folder needed)
 
 **Mac / Linux** — run once in Terminal:
 ```bash
-cp .claude/commands/qbr-prep.md ~/.claude/commands/qbr-prep.md
+mkdir -p ~/.claude/commands
+curl -o ~/.claude/commands/qbr-prep.md https://raw.githubusercontent.com/GavanM16/partner-success-ai-toolkit/main/.claude/commands/qbr-prep.md
+curl -o ~/.claude/commands/deck-builder.md https://raw.githubusercontent.com/GavanM16/partner-success-ai-toolkit/main/.claude/commands/deck-builder.md
 ```
 
 **Windows** — run once in PowerShell:
 ```powershell
-Copy-Item ".claude\commands\qbr-prep.md" "$env:USERPROFILE\.claude\commands\qbr-prep.md"
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/GavanM16/partner-success-ai-toolkit/main/.claude/commands/qbr-prep.md" -OutFile "$env:USERPROFILE\.claude\commands\qbr-prep.md"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/GavanM16/partner-success-ai-toolkit/main/.claude/commands/deck-builder.md" -OutFile "$env:USERPROFILE\.claude\commands\deck-builder.md"
 ```
-> If the folder doesn't exist yet, create it first:
-> ```powershell
-> New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands"
-> ```
 
-After this, `/qbr-prep` works everywhere — not just in this project.
-
-### Option 3 — Share the file directly
-Send a teammate the file: `.claude/commands/qbr-prep.md`
-
-- **Mac/Linux:** they drop it into `~/.claude/commands/`
-- **Windows:** they drop it into `C:\Users\<their-username>\.claude\commands\`
-
-They can do this via File Explorer — just paste the file into that folder (create it if it doesn't exist).
+After this, `/qbr-prep` and `/deck-builder` work everywhere — no project folder needed.
 
 ### What teammates need
 1. Claude Code installed — [claude.ai/code](https://claude.ai/code)
 2. Microsoft 365 MCP connected (`/mcp` → "claude.ai Microsoft 365")
-3. Access to the `ClaudeCode-PB/` project folder (or the skill file)
 
 ---
 

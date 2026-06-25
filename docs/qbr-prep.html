@@ -545,10 +545,12 @@
   <div style="background:#1C1C2E; border-radius:12px; border:2px solid #FA4616; padding:32px 36px; margin-bottom:16px;">
     <div style="display:flex; align-items:center; gap:16px; margin-bottom:18px;">
       <div style="background:#FA4616; color:white; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 12px; border-radius:4px; white-space:nowrap;">Mac / Linux</div>
-      <p style="color:#8888AA; font-size:13px; margin:0;">Download <code style="color:#FA4616; background:#2A2A42; padding:2px 6px; border-radius:3px;">install.sh</code> from SharePoint <strong style="color:white;">Team Internal/</strong> and run:</p>
+      <p style="color:#8888AA; font-size:13px; margin:0;">Run once in <strong style="color:white;">Terminal</strong> — downloads directly from GitHub, no project folder needed:</p>
     </div>
-    <div style="background:#0E0E1E; border-radius:8px; padding:16px 20px; font-family:'SF Mono','Fira Code',monospace; font-size:14px; color:#FA4616; margin-bottom:16px; border-left:3px solid #FA4616;">
-      bash install.sh
+    <div style="background:#0E0E1E; border-radius:8px; padding:16px 20px; font-family:'SF Mono','Fira Code',monospace; font-size:12px; color:#FA4616; margin-bottom:16px; border-left:3px solid #FA4616; line-height:2.2;">
+      mkdir -p ~/.claude/commands<br>
+      curl -o ~/.claude/commands/qbr-prep.md https://raw.githubusercontent.com/GavanM16/partner-success-ai-toolkit/main/.claude/commands/qbr-prep.md<br>
+      curl -o ~/.claude/commands/deck-builder.md https://raw.githubusercontent.com/GavanM16/partner-success-ai-toolkit/main/.claude/commands/deck-builder.md
     </div>
     <div style="color:#8888AA; font-size:12px;">
       <strong style="color:white;">What it does:</strong>
@@ -559,12 +561,12 @@
   <div style="background:#1C1C2E; border-radius:12px; border:2px solid #3498DB; padding:32px 36px; margin-bottom:20px;">
     <div style="display:flex; align-items:center; gap:16px; margin-bottom:18px;">
       <div style="background:#3498DB; color:white; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 12px; border-radius:4px; white-space:nowrap;">Windows — PowerShell</div>
-      <p style="color:#8888AA; font-size:13px; margin:0;">Run once in <strong style="color:white;">PowerShell</strong> from the project folder:</p>
+      <p style="color:#8888AA; font-size:13px; margin:0;">Run once in <strong style="color:white;">PowerShell</strong> — downloads directly from GitHub, no project folder needed:</p>
     </div>
-    <div style="background:#0E0E1E; border-radius:8px; padding:16px 20px; font-family:'SF Mono','Fira Code',monospace; font-size:13px; color:#74B9FF; margin-bottom:16px; border-left:3px solid #3498DB; line-height:2;">
+    <div style="background:#0E0E1E; border-radius:8px; padding:16px 20px; font-family:'SF Mono','Fira Code',monospace; font-size:12px; color:#74B9FF; margin-bottom:16px; border-left:3px solid #3498DB; line-height:2.2;">
       <span style="color:rgba(52,152,219,0.4)">PS&gt;</span> New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands"<br>
-      <span style="color:rgba(52,152,219,0.4)">PS&gt;</span> Copy-Item ".claude\commands\qbr-prep.md" "$env:USERPROFILE\.claude\commands\qbr-prep.md"<br>
-      <span style="color:rgba(52,152,219,0.4)">PS&gt;</span> Copy-Item ".claude\commands\deck-builder.md" "$env:USERPROFILE\.claude\commands\deck-builder.md"
+      <span style="color:rgba(52,152,219,0.4)">PS&gt;</span> Invoke-WebRequest -Uri "https://raw.githubusercontent.com/GavanM16/partner-success-ai-toolkit/main/.claude/commands/qbr-prep.md" -OutFile "$env:USERPROFILE\.claude\commands\qbr-prep.md"<br>
+      <span style="color:rgba(52,152,219,0.4)">PS&gt;</span> Invoke-WebRequest -Uri "https://raw.githubusercontent.com/GavanM16/partner-success-ai-toolkit/main/.claude/commands/deck-builder.md" -OutFile "$env:USERPROFILE\.claude\commands\deck-builder.md"
     </div>
     <div style="color:#8888AA; font-size:12px;">
       No terminal? Use <strong style="color:white;">File Explorer</strong> — paste the .md files into <code style="color:#74B9FF; background:#2A2A42; padding:1px 5px; border-radius:3px;">C:\Users\&lt;you&gt;\.claude\commands\</code> (create the folder if it doesn't exist).

@@ -105,27 +105,21 @@ partner's section of the portfolio overview.
 
 ## How to share this with your team
 
-### Method 1 — Copy the skill file manually
+### Method 1 — Download directly from GitHub (no project folder needed)
 
-**Mac / Linux** — run in Terminal:
+**Mac / Linux** — run once in Terminal:
 ```bash
-cp .claude/commands/qbr-prep.md ~/.claude/commands/qbr-prep.md
+mkdir -p ~/.claude/commands
+curl -o ~/.claude/commands/qbr-prep.md https://raw.githubusercontent.com/GavanM16/partner-success-ai-toolkit/main/.claude/commands/qbr-prep.md
+curl -o ~/.claude/commands/deck-builder.md https://raw.githubusercontent.com/GavanM16/partner-success-ai-toolkit/main/.claude/commands/deck-builder.md
 ```
 
-**Windows** — run in PowerShell:
+**Windows** — run once in PowerShell:
 ```powershell
-# Create the folder if it doesn't exist
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands"
-# Copy the skill file
-Copy-Item ".claude\commands\qbr-prep.md" "$env:USERPROFILE\.claude\commands\qbr-prep.md"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/GavanM16/partner-success-ai-toolkit/main/.claude/commands/qbr-prep.md" -OutFile "$env:USERPROFILE\.claude\commands\qbr-prep.md"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/GavanM16/partner-success-ai-toolkit/main/.claude/commands/deck-builder.md" -OutFile "$env:USERPROFILE\.claude\commands\deck-builder.md"
 ```
-
-**Windows (File Explorer)** — no terminal needed:
-1. Navigate to `C:\Users\<your-username>\.claude\commands\` (create the folder if missing)
-2. Paste the `qbr-prep.md` file into that folder
-
-### Method 2 — Get the file from a teammate
-Ask them to send you `.claude/commands/qbr-prep.md` and drop it in the folder above.
 
 ### What teammates need
 - Claude Code installed (claude.ai/code or VS Code extension)
