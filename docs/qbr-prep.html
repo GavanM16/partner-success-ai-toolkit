@@ -541,11 +541,11 @@
   <!-- ── SHARE WITH TEAM ── -->
   <div class="section-title">Share With Your Team</div>
 
-  <!-- One-line install banner -->
-  <div style="background:#1C1C2E; border-radius:12px; border:2px solid #FA4616; padding:32px 36px; margin-bottom:20px;">
+  <!-- Install banners — Mac/Linux and Windows -->
+  <div style="background:#1C1C2E; border-radius:12px; border:2px solid #FA4616; padding:32px 36px; margin-bottom:16px;">
     <div style="display:flex; align-items:center; gap:16px; margin-bottom:18px;">
-      <div style="background:#FA4616; color:white; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 12px; border-radius:4px; white-space:nowrap;">One-Command Install</div>
-      <p style="color:#8888AA; font-size:13px; margin:0;">Teammates download <code style="color:#FA4616; background:#2A2A42; padding:2px 6px; border-radius:3px;">install.sh</code> from SharePoint and run a single command — no setup, no zipping, no copying files.</p>
+      <div style="background:#FA4616; color:white; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 12px; border-radius:4px; white-space:nowrap;">Mac / Linux</div>
+      <p style="color:#8888AA; font-size:13px; margin:0;">Download <code style="color:#FA4616; background:#2A2A42; padding:2px 6px; border-radius:3px;">install.sh</code> from SharePoint <strong style="color:white;">Team Internal/</strong> and run:</p>
     </div>
     <div style="background:#0E0E1E; border-radius:8px; padding:16px 20px; font-family:'SF Mono','Fira Code',monospace; font-size:14px; color:#FA4616; margin-bottom:16px; border-left:3px solid #FA4616;">
       bash install.sh
@@ -553,6 +553,21 @@
     <div style="color:#8888AA; font-size:12px;">
       <strong style="color:white;">What it does:</strong>
       &nbsp;✅ Installs /qbr-prep &nbsp;·&nbsp; ✅ Installs /deck-builder &nbsp;·&nbsp; ✅ Installs the PPTX engine &nbsp;·&nbsp; ✅ Installs python-pptx &nbsp;·&nbsp; ✅ Guides through Microsoft 365 MCP setup
+    </div>
+  </div>
+
+  <div style="background:#1C1C2E; border-radius:12px; border:2px solid #3498DB; padding:32px 36px; margin-bottom:20px;">
+    <div style="display:flex; align-items:center; gap:16px; margin-bottom:18px;">
+      <div style="background:#3498DB; color:white; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 12px; border-radius:4px; white-space:nowrap;">Windows — PowerShell</div>
+      <p style="color:#8888AA; font-size:13px; margin:0;">Run once in <strong style="color:white;">PowerShell</strong> from the project folder:</p>
+    </div>
+    <div style="background:#0E0E1E; border-radius:8px; padding:16px 20px; font-family:'SF Mono','Fira Code',monospace; font-size:13px; color:#74B9FF; margin-bottom:16px; border-left:3px solid #3498DB; line-height:2;">
+      <span style="color:rgba(52,152,219,0.4)">PS&gt;</span> New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands"<br>
+      <span style="color:rgba(52,152,219,0.4)">PS&gt;</span> Copy-Item ".claude\commands\qbr-prep.md" "$env:USERPROFILE\.claude\commands\qbr-prep.md"<br>
+      <span style="color:rgba(52,152,219,0.4)">PS&gt;</span> Copy-Item ".claude\commands\deck-builder.md" "$env:USERPROFILE\.claude\commands\deck-builder.md"
+    </div>
+    <div style="color:#8888AA; font-size:12px;">
+      No terminal? Use <strong style="color:white;">File Explorer</strong> — paste the .md files into <code style="color:#74B9FF; background:#2A2A42; padding:1px 5px; border-radius:3px;">C:\Users\&lt;you&gt;\.claude\commands\</code> (create the folder if it doesn't exist).
     </div>
   </div>
 
@@ -564,10 +579,11 @@
       <p style="margin-top:10px; font-size:12px; color:#8888AA;">Or ask Mihai to share it directly via Teams.</p>
     </div>
     <div class="share-method">
-      <h4>Step 2 — Run in Terminal</h4>
-      <p>Open Terminal, navigate to the download folder, then:</p>
+      <h4>Step 2 — Run the installer</h4>
+      <p><strong style="color:white;">Mac/Linux:</strong> in Terminal:</p>
       <div class="code-block" style="font-size:12px;">bash install.sh</div>
-      <p style="margin-top:10px; font-size:12px; color:#8888AA;">Takes under 30 seconds. Works on Mac and Linux.</p>
+      <p style="margin-top:8px; font-size:12px;"><strong style="color:white;">Windows:</strong> use the PowerShell commands from the box above.</p>
+      <p style="margin-top:10px; font-size:12px; color:#8888AA;">Takes under 30 seconds. Mac, Linux &amp; Windows.</p>
     </div>
     <div class="share-method">
       <h4>Step 3 — Connect SharePoint</h4>
@@ -604,8 +620,10 @@
     &nbsp;&nbsp;&nbsp;&nbsp;├── <span class="highlight">generate_qbr_pptx.py</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">← PPTX generator script</span><br>
     &nbsp;&nbsp;&nbsp;&nbsp;└── <span class="highlight">QBR_CFO_Review_Q2_FY27.pptx</span> &nbsp;<span class="comment">← Example output</span><br>
     <br>
-    After running install.sh, teammates get:<br>
-    ~/.claude/commands/qbr-prep.md &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">← Global skill (works in any project)</span><br>
+    After installing, skill lives at:<br>
+    Mac/Linux: &nbsp;~/.claude/commands/qbr-prep.md<br>
+    Windows: &nbsp;&nbsp;C:\Users\&lt;you&gt;\.claude\commands\qbr-prep.md<br>
+    <br>
     ~/.claude/commands/deck-builder.md &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">← Presentation factory skill</span><br>
     ~/.claude/ps-toolkit/agents/deck-builder/ <span class="comment">← PPTX engine</span><br>
     ~/.claude/ps-toolkit/exports/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">← Generated decks land here</span>
