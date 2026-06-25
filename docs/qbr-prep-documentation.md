@@ -180,15 +180,30 @@ Anyone with access to the `ClaudeCode-PB/` project folder already has the skill.
 The skill lives at: `.claude/commands/qbr-prep.md`
 
 ### Option 2 — Global install (works in any project)
-Run this once in terminal:
+
+**Mac / Linux** — run once in Terminal:
 ```bash
 cp .claude/commands/qbr-prep.md ~/.claude/commands/qbr-prep.md
 ```
+
+**Windows** — run once in PowerShell:
+```powershell
+Copy-Item ".claude\commands\qbr-prep.md" "$env:USERPROFILE\.claude\commands\qbr-prep.md"
+```
+> If the folder doesn't exist yet, create it first:
+> ```powershell
+> New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands"
+> ```
+
 After this, `/qbr-prep` works everywhere — not just in this project.
 
 ### Option 3 — Share the file directly
-Send a teammate the file: `.claude/commands/qbr-prep.md`  
-They paste it into their own `.claude/commands/` folder.
+Send a teammate the file: `.claude/commands/qbr-prep.md`
+
+- **Mac/Linux:** they drop it into `~/.claude/commands/`
+- **Windows:** they drop it into `C:\Users\<their-username>\.claude\commands\`
+
+They can do this via File Explorer — just paste the file into that folder (create it if it doesn't exist).
 
 ### What teammates need
 1. Claude Code installed — [claude.ai/code](https://claude.ai/code)

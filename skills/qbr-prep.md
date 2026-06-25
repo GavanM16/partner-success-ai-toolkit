@@ -105,17 +105,27 @@ partner's section of the portfolio overview.
 
 ## How to share this with your team
 
-### Method 1 — Run the installer
-Download `install.sh` from the SharePoint `Team Internal/` folder and run:
-```bash
-bash install.sh
-```
-This installs `/qbr-prep` and `/deck-builder` globally on your machine in one step.
+### Method 1 — Copy the skill file manually
 
-### Method 2 — Copy from this repo
+**Mac / Linux** — run in Terminal:
 ```bash
 cp .claude/commands/qbr-prep.md ~/.claude/commands/qbr-prep.md
 ```
+
+**Windows** — run in PowerShell:
+```powershell
+# Create the folder if it doesn't exist
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands"
+# Copy the skill file
+Copy-Item ".claude\commands\qbr-prep.md" "$env:USERPROFILE\.claude\commands\qbr-prep.md"
+```
+
+**Windows (File Explorer)** — no terminal needed:
+1. Navigate to `C:\Users\<your-username>\.claude\commands\` (create the folder if missing)
+2. Paste the `qbr-prep.md` file into that folder
+
+### Method 2 — Get the file from a teammate
+Ask them to send you `.claude/commands/qbr-prep.md` and drop it in the folder above.
 
 ### What teammates need
 - Claude Code installed (claude.ai/code or VS Code extension)

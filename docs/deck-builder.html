@@ -206,23 +206,43 @@
   <!-- FILE MAP -->
   <!-- Install banner -->
   <div class="sec">Share With Your Team</div>
-  <div style="background:#1C1C2E; border-radius:12px; border:2px solid #FA4616; padding:28px 32px; margin-bottom:20px;">
+
+  <!-- Mac/Linux -->
+  <div style="background:#1C1C2E; border-radius:12px; border:2px solid #FA4616; padding:28px 32px; margin-bottom:16px;">
     <div style="display:flex; align-items:center; gap:14px; margin-bottom:14px;">
-      <div style="background:#FA4616; color:white; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:3px 10px; border-radius:3px; white-space:nowrap;">One-Command Install</div>
-      <p style="color:#8888AA; font-size:13px; margin:0;">Download <code style="color:#FA4616; background:#2A2A42; padding:1px 5px; border-radius:3px;">install.sh</code> from SharePoint <strong style="color:white;">Team Internal/</strong> and run:</p>
+      <div style="background:#FA4616; color:white; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:3px 10px; border-radius:3px; white-space:nowrap;">Mac / Linux</div>
+      <p style="color:#8888AA; font-size:13px; margin:0;">Run once in <strong style="color:white;">Terminal</strong> from the project folder:</p>
     </div>
     <div style="background:#0E0E1E; border-radius:6px; padding:14px 18px; font-family:'SF Mono','Fira Code',monospace; font-size:14px; color:#FA4616; margin-bottom:12px; border-left:3px solid #FA4616;">
-      bash install.sh
+      cp .claude/commands/deck-builder.md ~/.claude/commands/deck-builder.md
     </div>
     <div style="color:#8888AA; font-size:12px;">
-      Installs /qbr-prep &nbsp;·&nbsp; /deck-builder &nbsp;·&nbsp; PPTX engine &nbsp;·&nbsp; python-pptx &nbsp;·&nbsp; MCP setup guide &nbsp;— everything, in one shot.
+      Copies /deck-builder globally — works in any project, not just this one.
     </div>
+  </div>
+
+  <!-- Windows -->
+  <div style="background:#1C1C2E; border-radius:12px; border:2px solid #3498DB; padding:28px 32px; margin-bottom:16px;">
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:14px;">
+      <div style="background:#3498DB; color:white; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:3px 10px; border-radius:3px; white-space:nowrap;">Windows — PowerShell</div>
+      <p style="color:#8888AA; font-size:13px; margin:0;">Run once in <strong style="color:white;">PowerShell</strong> from the project folder:</p>
+    </div>
+    <div style="background:#0E0E1E; border-radius:6px; padding:14px 18px; font-family:'SF Mono','Fira Code',monospace; font-size:13px; color:#74B9FF; margin-bottom:12px; border-left:3px solid #3498DB; line-height:2;">
+      New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands"<br>
+      Copy-Item ".claude\commands\deck-builder.md" "$env:USERPROFILE\.claude\commands\deck-builder.md"
+    </div>
+    <div style="color:#8888AA; font-size:12px;">
+      No terminal? Use <strong style="color:white;">File Explorer</strong> — paste <code style="color:#74B9FF; background:#2A2A42; padding:1px 5px; border-radius:3px;">deck-builder.md</code> into <code style="color:#74B9FF; background:#2A2A42; padding:1px 5px; border-radius:3px;">C:\Users\&lt;you&gt;\.claude\commands\</code> (create the folder if it doesn't exist).
+    </div>
+  </div>
+
+  <div style="background:#2A2A42; border-radius:8px; padding:16px 20px; margin-bottom:48px; font-size:12px; color:#8888AA; border-left:3px solid #FA4616;">
+    <strong style="color:white;">Also needed:</strong> Copy <code style="color:#FA4616; background:#1C1C2E; padding:1px 5px; border-radius:3px;">agents/deck-builder/generate_deck.py</code> to the same relative location so the PPTX engine can run. Full setup guide in <code style="color:#FA4616; background:#1C1C2E; padding:1px 5px; border-radius:3px;">README.md</code>.
   </div>
 
   <div class="sec" style="margin-top:40px;">File Reference</div>
   <div class="file-map">
     ClaudeCode-PB/<br>
-    ├── <span class="hi">install.sh</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">← Share this with teammates — installs everything</span><br>
     ├── <span class="hi">.claude/commands/deck-builder.md</span> &nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">← THE AGENT (what /deck-builder runs)</span><br>
     ├── agents/deck-builder/<br>
     │ &nbsp;&nbsp;├── <span class="hi">generate_deck.py</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">← PPTX engine — 10 slide builders</span><br>
@@ -233,11 +253,9 @@
     └── exports/<br>
     &nbsp;&nbsp;&nbsp;&nbsp;└── <span class="hi">*.pptx</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">← Generated decks land here</span><br>
     <br>
-    After running install.sh, teammates get:<br>
-    ~/.claude/commands/qbr-prep.md &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">← Global /qbr-prep skill</span><br>
-    ~/.claude/commands/deck-builder.md &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">← Global /deck-builder skill</span><br>
-    ~/.claude/ps-toolkit/agents/deck-builder/ <span class="cm">← PPTX engine</span><br>
-    ~/.claude/ps-toolkit/exports/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">← Generated decks land here</span>
+    After installing, skill lives at:<br>
+    Mac/Linux: &nbsp;~/.claude/commands/deck-builder.md<br>
+    Windows: &nbsp;&nbsp;C:\Users\&lt;you&gt;\.claude\commands\deck-builder.md
   </div>
 
 </div>
