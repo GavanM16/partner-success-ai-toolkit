@@ -1,7 +1,5 @@
-# Generated PowerPoint files
-exports/*.pptx
-exports/~$*
-docs/~$*
+# Generated output — never commit
+exports/
 
 # Python
 __pycache__/
